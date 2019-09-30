@@ -21,7 +21,7 @@ public class Comment {
     @Column(name = "createdDate")
     private Date createdDate;
     //The 'comments' table is mapped to 'users' table with Many:One mapping
-    //FetchType is EAGER
+    //FetchType is EAGER.
     @ManyToOne(fetch = FetchType.EAGER)
     //Below annotation indicates that the name of the column in 'comments' table referring the primary key in 'users' table will be 'user_id'
     @JoinColumn(name = "user_id")
