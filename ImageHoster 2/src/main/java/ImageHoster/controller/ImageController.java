@@ -92,11 +92,12 @@ public class ImageController {
 
     //The method first needs to convert the list of all the tags to a string containing all the tags separated by a comma and then add this string in a Model type object
     //This string is then displayed by 'edit.html' file as previous tags of an image
+    // validates the owner of image to edit the image.
     @RequestMapping(value = "/editImage")
     public String editImage(@RequestParam("imageId") Integer imageId, Model model,HttpSession session) {
         User loggedUser = (User) session.getAttribute("loggeduser");
         Image image = imageService.getImage(imageId);
-        if(loggedUser.getId()!=image.getUser().getId())
+        if(loggedUser.getId()!=image.getUser().getId()) // validates if the logged-in user is the owner or not.if no then error is shown.
         {
             String error = "Only the owner of the image can edit the image";
             model.addAttribute("editError", error);
@@ -105,7 +106,7 @@ public class ImageController {
             model.addAttribute("comments", image.getComments());
             return "images/image";
         }
-        else
+        else //the owner and logged-in user is same.
         {
             String tags = convertTagsToString(image.getTags());
             model.addAttribute("image", image);
@@ -153,11 +154,12 @@ public class ImageController {
     //This controller method is called when the request pattern is of type 'deleteImage' and also the incoming request is of DELETE type
     //The method calls the deleteImage() method in the business logic passing the id of the image to be deleted
     //Looks for a controller method with request mapping of type '/images'
+    //  // validates the owner of image to edit the image.
     @RequestMapping(value = "/deleteImage", method = RequestMethod.DELETE)
     public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId,HttpSession session, Model model) {
         User loggedUser = (User) session.getAttribute("loggeduser");
         Image image = imageService.getImage(imageId);
-        if(loggedUser.getId()!=image.getUser().getId()) {
+        if(loggedUser.getId()!=image.getUser().getId()) { // validates if the logged-in user is the owner or not.if no then error is shown.
             String error = "Only the owner of the image can delete the image";
             model.addAttribute("deleteError", error);
             model.addAttribute("image", image);
@@ -165,7 +167,7 @@ public class ImageController {
             model.addAttribute("comments", image.getComments());
             return "images/image";
         }
-        else {
+        else { // owner and logged-in user same , image can be deleted
             imageService.deleteImage(imageId);
             return "redirect:/images";
         }
