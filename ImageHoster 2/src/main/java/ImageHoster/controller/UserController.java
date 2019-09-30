@@ -42,13 +42,14 @@ public class UserController {
     @RequestMapping(value = "users/registration", method = RequestMethod.POST)
     public String registerUser(User user,Model model) {
         String password = user.getPassword();
-        if(checkPassword(password)==true)
+        if(checkPassword(password)==true)//Checks if the password entered matches the criteria i.e  1 alphabet, 1 number & 1 special character
         {
-            userService.registerUser(user);
+            userService.registerUser(user);//registers the user if true.
             return "users/login";
         }
         else
         {
+            //shows an error on webage if the criteria of password is not met and returns to registration page again.
             String error = "Password must contain atleast 1 alphabet, 1 number & 1 special character";
             model.addAttribute("User",user);
             model.addAttribute("passwordTypeError",error);
@@ -91,7 +92,7 @@ public class UserController {
         model.addAttribute("images", images);
         return "index";
     }
-
+    //method to validate the password with the criteria of  1 alphabet, 1 number & 1 special character
     public boolean checkPassword(String password)
     {
         boolean checkDigit = false;
@@ -111,7 +112,7 @@ public class UserController {
         }
         if(checkDigit==true && checkAlpha==true && checkChar==true)
         {
-            return true;
+            return true; //returns true if the password  at least contains 1 alphabet, 1 number and 1 special character.
         }
         return false;
     }
