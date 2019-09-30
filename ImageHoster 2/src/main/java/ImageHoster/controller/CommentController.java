@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 //Comment Controller Class
-@Controller //
+@Controller
 public class CommentController {
     @Autowired
     private CommentService commentService;
