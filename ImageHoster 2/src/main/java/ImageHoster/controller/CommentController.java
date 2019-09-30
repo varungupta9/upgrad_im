@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 //Comment Controller Class
-@Controller //
+@Controller
 public class CommentController {
     @Autowired
     private CommentService commentService;
@@ -25,7 +25,7 @@ public class CommentController {
     //set the comments from the user of the image by getting the logged in user from the Http Session
     //set the current date
     //insert the comment by calling the insertComment of commentService
-    //redirects to images.html with imageid and title
+    //redirects to images.html with imageid and title.
     @RequestMapping(value = "/image/{imageId}/{imageTitle}/comments", method = RequestMethod.POST)
     public String createComment(@PathVariable("imageId") Integer imageId, @PathVariable("imageTitle") String title, @RequestParam("comment") String text, HttpSession session) {
         User user = (User) session.getAttribute("loggeduser");

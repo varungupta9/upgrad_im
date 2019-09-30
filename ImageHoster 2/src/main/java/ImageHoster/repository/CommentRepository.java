@@ -16,6 +16,7 @@ public class CommentRepository {
     //Starts a transaction
     //The transaction is committed if it is successful
     //The transaction is rolled back in case of unsuccessful transaction
+    //return comment
     public Comment insertComment(Comment comment)
     {
         EntityManager em = emf.createEntityManager();
